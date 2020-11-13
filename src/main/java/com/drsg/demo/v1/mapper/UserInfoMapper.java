@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
  * @author YXs
  * @since 2020-11-12
  */
+@Repository
 public interface UserInfoMapper extends BaseMapper<UserInfo> {
     UserInfo loadByUsername(String username);
 }

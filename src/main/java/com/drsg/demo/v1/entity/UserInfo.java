@@ -20,7 +20,7 @@ import java.util.Set;
  * @author YXs
  * @since 2020-11-12
  */
-@TableName("USER_INFO")
+@TableName(value = "USER_INFO", resultMap = "UserRoleResultMap")
 public class UserInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;

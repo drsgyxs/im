@@ -1,7 +1,8 @@
 package com.drsg.demo.v1.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.drsg.demo.v1.entity.RoleInfo;
 import com.drsg.demo.v1.entity.UserInfo;
+import com.drsg.demo.v1.mapper.UserInfoMapper;
 import com.drsg.demo.v1.service.AuthUserService;
 import com.drsg.demo.v1.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,20 +13,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthUserServiceImpl implements AuthUserService {
-    private final UserInfoService userInfoService;
+    private final UserInfoMapper userInfoMapper;
 
     @Autowired
-    public AuthUserServiceImpl(UserInfoService userInfoService) {
-        this.userInfoService = userInfoService;
+    public AuthUserServiceImpl(UserInfoMapper userInfoMapper) {
+        this.userInfoMapper = userInfoMapper;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserInfo userInfo = this.userInfoService.loadByUsername(username);
-        System.out.println(userInfo);
-        userInfo.getRoles().forEach(System.out::println);
+        UserInfo userInfo = this.userInfoMapper.loadByUsername(username);
         if (userInfo == null)
             throw new UsernameNotFoundException("用户不存在");
-        return User.withUsername(username).password(userInfo.getPassword()).roles("USER").build();
+        System.out.println(userInfo);
+        String[] roles = new String[userInfo.getRoles().size()];
+        int i = 0;
+        for (RoleInfo role : userInfo.getRoles())
+            roles[i++] = role.getRoleName();
+        return User.withUsername(username).password(userInfo.getPassword()).roles(roles).build();
     }
 }

@@ -1,9 +1,11 @@
 package com.drsg.demo.v1.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.drsg.demo.v1.entity.Page;
 import com.drsg.demo.v1.entity.Result;
 import com.drsg.demo.v1.entity.UserInfo;
+import com.drsg.demo.v1.mapper.UserInfoMapper;
 import com.drsg.demo.v1.service.UserInfoService;
 import com.drsg.demo.v1.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +44,8 @@ public class UserInfoController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public Result<Page<UserInfo>> userList(Page pageInfo) {
-        Page<UserInfo> page = new Page<>(1, 5);
-        this.userInfoService.page(page);
-        return Result.ok(page);
+    public Result<Page<UserInfo>> userList(Page<UserInfo> page, UserInfo userInfo) {
+        return Result.ok(this.userInfoService.userPage(page, userInfo));
     }
 
     @GetMapping("/me")
@@ -56,7 +56,5 @@ public class UserInfoController {
         queryWrapper.eq("USERNAME", user.getUsername());
         return Result.ok(this.userInfoService.getOne(queryWrapper));
     }
-
-
 }
 

@@ -1,5 +1,6 @@
 package com.drsg.demo.v1.service;
 
+import com.drsg.demo.v1.entity.Page;
 import com.drsg.demo.v1.entity.UserInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-11-12
  */
 public interface UserInfoService extends IService<UserInfo> {
-    UserInfo loadByUsername(String username);
+    Page<UserInfo> userPage(Page<UserInfo> page, UserInfo userInfo);
 }
