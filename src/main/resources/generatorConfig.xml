@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+<!--    <context id="dsql" targetRuntime="MyBatis3DynamicSql">-->
+    <context id="normal" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+<!--            <property name="addRemarkComments" value="true"/>-->
+<!--            <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>-->
+        </commentGenerator>
+        <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL"
+                        userId="YXS"
+                        password="100997"
+        />
+
+        <javaModelGenerator targetPackage="com.drsg.demo.entity" targetProject="src/main/java">
+            <property name="rootClass" value="com.drsg.demo.entity.BaseEntity"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.drsg.demo.dao" targetProject="src/main/resources" />
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.drsg.demo.dao" targetProject="src/main/java"/>
+<!--        <javaClientGenerator targetPackage="com.drsg.demo.dao" targetProject="src/main/java">-->
+<!--        </javaClientGenerator>-->
+
+<!--        <table tableName="USER_INFO" schema="YXS" mapperName="UserInfoDao" />-->
+        <table tableName="ROLE_INFO" schema="YXS" mapperName="RoleInfoDao" />
+<!--        <table tableName="USER_ROLE" schema="YXS" mapperName="UserRoleDao" />-->
+<!--        <table tableName="AUTHORITY" schema="YXS" mapperName="AuthorityDao" />-->
+<!--        <table tableName="ROLE_AUTHORITY" schema="YXS" mapperName="RoleAuthorityDao" />-->
+
+<!--        <table schema="finance" tableName="ACCOUNT_INFO" />-->
+<!--        <table schema="finance" tableName="BRANCH_ACCOUNT" />-->
+<!--        <table schema="finance" tableName="BRANCH_INFO" />-->
+<!--        <table schema="finance" tableName="CODE_MANAGE" />-->
+<!--        <table schema="finance" tableName="MENU_INFO" />-->
+<!--        <table schema="finance" tableName="ROLE_INFO" />-->
+<!--        <table schema="finance" tableName="ROLE_MENU" />-->
+<!--        <table schema="finance" tableName="SYS_LOGIN_LOG" />-->
+<!--        <table schema="finance" tableName="SYS_OPERATION_LOG" />-->
+<!--        <table schema="finance" tableName="USER_INFO"/>-->
+<!--        <table schema="finance" tableName="USER_ROLE"/>-->
+
+    </context>
+</generatorConfiguration>

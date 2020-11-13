@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drsg.demo.v1.mapper.UserInfoMapper">
+    <resultMap id="RoleResultMap" type="com.drsg.demo.v1.entity.UserInfo">
+        <id column="USER_ID" jdbcType="NUMERIC" property="userId" />
+        <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+        <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+        <result column="AVATAR_URL" jdbcType="VARCHAR" property="avatarUrl" />
+        <result column="SEX" jdbcType="CHAR" property="sex" />
+        <result column="SIGNATURE" jdbcType="VARCHAR" property="signature" />
+        <result column="ENABLED" jdbcType="CHAR" property="enabled" />
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+        <collection property="roles" ofType="com.drsg.demo.v1.entity.RoleInfo">
+            <id column="ROLE_ID" property="roleId" />
+            <result column="ROLE_NAME" property="roleName" />
+            <result column="DESCRIPTION" property="description" />
+        </collection>
+    </resultMap>
+    <select id="loadByUsername" resultMap="RoleResultMap">
+        select
+            UI.USER_ID, USERNAME, PASSWORD, ENABLED, RI.ROLE_ID, RI.ROLE_NAME
+        from USER_INFO UI inner join USER_ROLE UR on UI.USER_ID = UR.USER_ID inner join ROLE_INFO RI on UR.ROLE_ID = RI.ROLE_ID
+        where USERNAME = #{username}
+    </select>
+</mapper>

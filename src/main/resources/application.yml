@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: dcfb8fb5d4e9ad70cf46
+            client-secret: 7085b9be371ad905c2670ba3a3e52ae1f79930af
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:ORCL
+    username: YXS
+    password: 100997
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+  jackson:
+    default-property-inclusion: non_null
+logging:
+  level:
+    root: info
+    com.drsg.demo.v1.mapper: debug
+#    org.springframework.security: debug
+
