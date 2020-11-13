@@ -1,13 +1,6 @@
 server:
   port: 8080
 spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          github:
-            client-id: dcfb8fb5d4e9ad70cf46
-            client-secret: 7085b9be371ad905c2670ba3a3e52ae1f79930af
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521:ORCL
